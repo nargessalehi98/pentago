@@ -1,16 +1,22 @@
-import javax.swing.*;
 import java.util.ArrayList;
-import java.util.Scanner;
 
+/**
+ * this class provide map info and applications - board game
+ *
+ * @author Narges Salehi
+ */
 public class Map {
+    //4 Array list for each square of board game
     private ArrayList<String> square1;
     private ArrayList<String> square2;
     private ArrayList<String> square3;
     private ArrayList<String> square4;
-    String red = "  🔴  ";
-    String black = "  ⚫  ";
 
+    /**
+     * creat a new map for board game
+     */
     public Map() {
+        //defining map with empty value
         square1 = new ArrayList<>();
         for (int i = 0; i < 9; i++) {
             square1.add("  ⚪  ");
@@ -30,8 +36,22 @@ public class Map {
 
     }
 
-    public int checkLine(int main, int a, int b, int c, int d, ArrayList one, ArrayList two, String Color) {
+    /**
+     * check given line of map that allows player to win - provide game wining rule
+     * @param main start point of line
+     * @param a next disk on the line
+     * @param b next disk on the line
+     * @param c next disk on the line
+     * @param d next disk on the line
+     * @param one a square that contains start point of line
+     * @param two  a square that contains finish point of line
+     * @param Color color of player
+     * @return number of line with given condition of wining
+     */
+    public int checkLine(int main, int a, int b, int c, int d, ArrayList<String> one, ArrayList<String> two, String Color) {
+        //count to one if the line has the condition of wining
         int counter = 0;
+        //check color of 5 disk in line
         if (one.get(main).equals(one.get(a)) && one.get(main).equals(one.get(b)) && one.get(main).equals(two.get(c))
                 && one.get(main).equals(two.get(d))) {
             if (one.get(main).equals(Color))
@@ -40,231 +60,91 @@ public class Map {
         return counter;
     }
 
-    public boolean checkWinner(String Color) {
-        int counter = 0;
-        counter += checkLine(0, 1, 2, 0, 1, square1, square2, Color);
-        counter += checkLine(2, 1, 0, 2, 1, square2, square1, Color);
-        counter += checkLine(3, 4, 5, 3, 4, square1, square2, Color);
-        counter += checkLine(5, 4, 3, 5, 4, square2, square1, Color);
-        counter += checkLine(6, 7, 8, 6, 7, square1, square2, Color);
-        counter += checkLine(8, 7, 6, 7, 8, square2, square1, Color);
 
-        counter += checkLine(0, 3, 6, 0, 3, square1, square3, Color);
-        counter += checkLine(6, 3, 0, 6, 3, square3, square1, Color);
-        counter += checkLine(1, 4, 7, 1, 4, square1, square3, Color);
-        counter += checkLine(7, 4, 1, 7, 4, square3, square1, Color);
-        counter += checkLine(2, 5, 8, 2, 5, square1, square3, Color);
-        counter += checkLine(8, 5, 2, 8, 5, square3, square1, Color);
-
-        counter += checkLine(0, 1, 2, 0, 1, square3, square4, Color);
-        counter += checkLine(2, 1, 0, 2, 1, square4, square3, Color);
-        counter += checkLine(3, 4, 5, 3, 4, square3, square4, Color);
-        counter += checkLine(5, 4, 3, 5, 4, square4, square3, Color);
-        counter += checkLine(6, 7, 8, 6, 7, square3, square4, Color);
-        counter += checkLine(8, 7, 6, 7, 8, square4, square3, Color);
-
-        counter += checkLine(0, 3, 6, 0, 3, square2, square4, Color);
-        counter += checkLine(6, 3, 0, 6, 3, square4, square2, Color);
-        counter += checkLine(1, 4, 7, 1, 4, square2, square4, Color);
-        counter += checkLine(7, 4, 1, 7, 4, square4, square2, Color);
-        counter += checkLine(2, 5, 8, 2, 5, square2, square4, Color);
-        counter += checkLine(8, 5, 2, 8, 5, square4, square2, Color);
-
-        counter += checkLine(2, 4, 6, 2, 4, square2, square3, Color);
-        counter += checkLine(6, 4, 2, 6, 4, square3, square2, Color);
-        counter += checkLine(0, 4, 8, 0, 4, square1, square4, Color);
-        counter += checkLine(8, 4, 0, 8, 4, square4, square1, Color);
-
-        if (square2.get(1).equals(square2.get(3)) && square2.get(1).equals(square1.get(8)) &&
-                square2.get(1).equals(square3.get(1)) && square2.get(1).equals(square3.get(3))) {
-            if (square2.get(1).equals(Color))
-                counter += 1;
-        }
-        if (square2.get(5).equals(square2.get(7)) && square2.get(5).equals(square4.get(0)) &&
-                square2.get(5).equals(square3.get(5)) && square2.get(5).equals(square3.get(7))) {
-            if (square2.get(5).equals(Color))
-                counter += 1;
-        }
-        if (square1.get(1).equals(square1.get(5)) && square1.get(1).equals(square2.get(6)) &&
-                square1.get(1).equals(square4.get(1)) && square1.get(1).equals(square4.get(5))) {
-            if (square1.get(1).equals(Color))
-                counter += 1;
-        }
-        if (square1.get(3).equals(square1.get(7)) && square1.get(3).equals(square3.get(2)) &&
-                square1.get(3).equals(square4.get(3)) && square1.get(3).equals(square4.get(7))) {
-            if (square1.get(3).equals(Color))
-                counter += 1;
-        }
-
-        return counter > 0;
+    /**
+     * return square with given number
+     * @param num of square
+     * @return Array list
+     */
+    public ArrayList<String> getSquare(int num) {
+        if (num == 1)
+            return square1;
+        if (num == 2)
+            return square2;
+        if (num == 3)
+            return square3; 
+        if (num == 4)
+            return square4;
+        else
+            return null;
     }
 
-    public void rotate() {
-        System.out.println("\nEnter number of square and rotate direction like 1 C :");
-        Scanner scanner1 = new Scanner(System.in);
-        int square = scanner1.nextInt();
-        String dir = scanner1.next();
-        if (square == 1) {
-            if (dir.equals("C")) {
-                ArrayList<String> temp = new ArrayList();
-                temp.add(0, square1.get(6));
-                temp.add(1, square1.get(3));
-                temp.add(2, square1.get(0));
-                temp.add(3, square1.get(7));
-                temp.add(4, square1.get(4));
-                temp.add(5, square1.get(1));
-                temp.add(6, square1.get(8));
-                temp.add(7, square1.get(5));
-                temp.add(8, square1.get(2));
-                square1 = temp;
-            }
-            if (dir.equals("NC")) {
-                ArrayList<String> temp = new ArrayList();
-                temp.add(0, square1.get(2));
-                temp.add(1, square1.get(5));
-                temp.add(2, square1.get(8));
-                temp.add(3, square1.get(1));
-                temp.add(4, square1.get(4));
-                temp.add(5, square1.get(7));
-                temp.add(6, square1.get(0));
-                temp.add(7, square1.get(3));
-                temp.add(8, square1.get(6));
-                square1 = temp;
-            }
-        } else if (square == 2) {
-            if (dir.equals("C")) {
-                ArrayList<String> temp = new ArrayList();
-                temp.add(0, square2.get(6));
-                temp.add(1, square2.get(3));
-                temp.add(2, square2.get(0));
-                temp.add(3, square2.get(7));
-                temp.add(4, square2.get(4));
-                temp.add(5, square2.get(1));
-                temp.add(6, square2.get(8));
-                temp.add(7, square2.get(5));
-                temp.add(8, square2.get(2));
-                square2 = temp;
-            }
-            if (dir.equals("NC")) {
-                ArrayList<String> temp = new ArrayList();
-                temp.add(0, square2.get(2));
-                temp.add(1, square2.get(5));
-                temp.add(2, square2.get(8));
-                temp.add(3, square2.get(1));
-                temp.add(4, square2.get(4));
-                temp.add(5, square2.get(7));
-                temp.add(6, square2.get(0));
-                temp.add(7, square2.get(3));
-                temp.add(8, square2.get(6));
-                square2 = temp;
-            }
-
-        } else if (square == 3) {
-            if (dir.equals("C")) {
-                ArrayList<String> temp = new ArrayList();
-                temp.add(0, square3.get(6));
-                temp.add(1, square3.get(3));
-                temp.add(2, square3.get(0));
-                temp.add(3, square3.get(7));
-                temp.add(4, square3.get(4));
-                temp.add(5, square3.get(1));
-                temp.add(6, square3.get(8));
-                temp.add(7, square3.get(5));
-                temp.add(8, square3.get(2));
-                square3 = temp;
-            }
-            if (dir.equals("NC")) {
-                ArrayList<String> temp = new ArrayList();
-                temp.add(0, square3.get(2));
-                temp.add(1, square3.get(5));
-                temp.add(2, square3.get(8));
-                temp.add(3, square3.get(1));
-                temp.add(4, square3.get(4));
-                temp.add(5, square3.get(7));
-                temp.add(6, square3.get(0));
-                temp.add(7, square3.get(3));
-                temp.add(8, square3.get(6));
-                square3 = temp;
-            }
-        } else if (square == 4) {
-            if (dir.equals("C")) {
-                ArrayList<String> temp = new ArrayList();
-                temp.add(0, square4.get(6));
-                temp.add(1, square4.get(3));
-                temp.add(2, square4.get(0));
-                temp.add(3, square4.get(7));
-                temp.add(4, square4.get(4));
-                temp.add(5, square4.get(1));
-                temp.add(6, square4.get(8));
-                temp.add(7, square4.get(5));
-                temp.add(8, square4.get(2));
-                square4 = temp;
-            }
-            if (dir.equals("NC")) {
-                ArrayList<String> temp = new ArrayList();
-                temp.add(0, square4.get(2));
-                temp.add(1, square4.get(5));
-                temp.add(2, square4.get(8));
-                temp.add(3, square4.get(1));
-                temp.add(4, square4.get(4));
-                temp.add(5, square4.get(7));
-                temp.add(6, square4.get(0));
-                temp.add(7, square4.get(3));
-                temp.add(8, square4.get(6));
-                square4 = temp;
-            }
-        }
+    /**
+     * set given Array list to given square
+     * @param temp given array list
+     * @param num of square
+     */
+    public void setSquare(ArrayList<String> temp, int num) {
+        if (num == 1)
+            square1 = temp;
+        if (num == 2)
+            square2 = temp;
+        if (num == 3)
+            square3 = temp;
+        if (num == 4)
+            square4 = temp;
     }
 
-    public void putDisk(String Color) {
-        System.out.println("\nEnter the number of square and circle :");
-        Scanner scanner = new Scanner(System.in);
-        int square = scanner.nextInt();
-        int circle = scanner.nextInt();
-        if (square > 4 || square < 1 || circle > 9 || circle < 1)
-            putDisk(Color);
-        else {
-            if (square == 1) {
-                if (square1.get(circle - 1).equals("  ⚪  ")) {
-                    square1.remove(circle - 1);
-                    square1.add(circle - 1, Color);
-                } else {
-                    System.out.println("Already taken");
-                    putDisk(Color);
+    /**
+     * check if there is an empty square
+     * @return true of false
+     */
+    public boolean isEmpty() {
+        //check square to find an empty square - if preset square is not empty check out next square else return true
+        boolean check = true;
+        for (String circle1 : square1) {
+            if (!(circle1.equals("  ⚪  "))) {
+                for (String circle2 : square2) {
+                    if (!(circle2.equals("  ⚪  "))) {
+                        for (String circle3 : square3) {
+                            if (!(circle3.equals("  ⚪  "))) {
+                                for (String circle : square4) {
+                                    if (!(circle.equals("  ⚪  "))) {
+                                        check=false;
+                                        return check;
+                                    }
+                                }
+                            } else
+                                return check;
+                        }
+                    }
+                    else
+                         return check;
                 }
             }
-            if (square == 2) {
-                if (square2.get(circle - 1).equals("  ⚪  ")) {
-                    square2.remove(circle - 1);
-                    square2.add(circle - 1, Color);
-                } else {
-                    System.out.println("Already taken");
-                    putDisk(Color);
-                }
-            }
-            if (square == 3) {
-                if (square3.get(circle - 1).equals("  ⚪  ")) {
-                    square3.remove(circle - 1);
-                    square3.add(circle - 1, Color);
-                } else {
-                    System.out.println("Already taken");
-                    putDisk(Color);
-                }
-            }
-            if (square == 4) {
-                if (square4.get(circle - 1).equals("  ⚪  ")) {
-                    square4.remove(circle - 1);
-                    square4.add(circle - 1, Color);
-                } else {
-                    System.out.println("Already taken");
-                    putDisk(Color);
-                }
-            }
+            else
+                return check;
         }
+        return false;
     }
 
+    /**
+     * print map of game
+     */
     public void print() {
         System.out.println("Square 1                    Square 2");
+        printSquares(square1, square2);
+        System.out.println("  ==    ==    ==     ==    ==   == ");
+        printSquares(square3, square4);
+        System.out.print("Square 3                   Square 4");
+    }
+
+    /**
+     * print neighbor squares in a line
+     * @param square1 left square
+     * @param square2 right square
+     */
+    private void printSquares(ArrayList<String> square1, ArrayList<String> square2) {
         for (int i = 0; i < 9; i++) {
             if (i == 2 || i == 5 || i == 8) {
                 System.out.print(square1.get(i) + "‖");
@@ -281,23 +161,6 @@ public class Map {
             } else
                 System.out.print(square1.get(i));
         }
-        System.out.println("  ==    ==    ==     ==    ==   == ");
-        for (int i = 0; i < 9; i++) {
-            if (i == 2 || i == 5 || i == 8) {
-                System.out.print(square3.get(i) + "‖");
-                if (i == 2) {
-                    System.out.println(square4.get(0) + square4.get(1) + square4.get(2));
-                    System.out.println();
-                }
-                if (i == 5) {
-                    System.out.println(square4.get(3) + square4.get(4) + square4.get(5));
-                    System.out.println();
-                }
-                if (i == 8)
-                    System.out.println(square4.get(6) + square4.get(7) + square4.get(8));
-            } else
-                System.out.print(square3.get(i));
-        }
-        System.out.print("Square 3                   Square 4");
     }
+
 }

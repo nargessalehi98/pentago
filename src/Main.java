@@ -1,51 +1,62 @@
 import java.util.Random;
 
+/**
+ * run whole game
+ *
+ * @author Narges Salehi
+ */
 public class Main {
 
     public static void main(String[] args) {
+        //creat a random number to set random color for player
         Random random = new Random();
         int rand = random.nextInt(2);
+        //color of player
         String red = "  🔴  ";
         String black = "  ⚫  ";
-        Map map = new Map();
-        map.print();
+        //creat a new game
+        GameRules game = new GameRules();
+        game.print();
         if (rand == 0) {
+            //start game
             while (true) {
-                map.putDisk(red);
-                map.print();
-                if (map.checkWinner(red)) {
+                game.putDisk(red);
+                game.print();
+                //check wining condition
+                if (game.checkWinner(red)) {
                     System.out.println("\nRed is winner !");
                     break;
                 }
-                map.rotate();
-                map.print();
-                if (map.checkWinner(red) && map.checkWinner(black)) {
+                //rotate
+                game.rotate();
+                game.print();
+                //check wining condition
+                if (game.checkWinner(red) && game.checkWinner(black)) {
                     System.out.println("\nequal!");
                     break;
-                }else if(map.checkWinner(red)){
+                } else if (game.checkWinner(red)) {
                     System.out.println("\nRed is winner !");
                     break;
-                }
-                else if(map.checkWinner(black)){
+                } else if (game.checkWinner(black)) {
                     System.out.println("\nblack is winner !");
                     break;
                 }
-                map.putDisk(black);
-                map.print();
-                if (map.checkWinner(black)) {
+                //same for next player
+                game.putDisk(black);
+                game.print();
+                if (game.checkWinner(black)) {
                     System.out.println("\nblack is winner !");
                     break;
                 }
-                map.rotate();
-                map.print();
-                if (map.checkWinner(red) && map.checkWinner(black)) {
+                game.rotate();
+                game.print();
+                if (game.checkWinner(red) && game.checkWinner(black)) {
                     System.out.println("\nequal!");
                     break;
-                }else if(map.checkWinner(red)){
+                } else if (game.checkWinner(red)) {
                     System.out.println("\nRed is winner !");
                     break;
-                }
-                else if(map.checkWinner(black)){
+                } else if (game.checkWinner(black)) {
                     System.out.println("\nblack is winner !");
                     break;
                 }
@@ -53,41 +64,39 @@ public class Main {
             }
         } else {
             while (true) {
-                map.putDisk(black);
-                map.print();
-                if (map.checkWinner(black)) {
+                game.putDisk(black);
+                game.print();
+                if (game.checkWinner(black)) {
                     System.out.println("\nblack is winner !");
                     break;
                 }
-                map.rotate();
-                map.print();
-                if (map.checkWinner(red) && map.checkWinner(black)) {
+                game.rotate();
+                game.print();
+                if (game.checkWinner(red) && game.checkWinner(black)) {
                     System.out.println("\nequal!");
                     break;
-                }else if(map.checkWinner(red)){
+                } else if (game.checkWinner(red)) {
                     System.out.println("\nRed is winner !");
                     break;
-                }
-                else if(map.checkWinner(black)){
+                } else if (game.checkWinner(black)) {
                     System.out.println("\nblack is winner !");
                     break;
                 }
-                map.putDisk(red);
-                map.print();
-                if (map.checkWinner(red)) {
+                game.putDisk(red);
+                game.print();
+                if (game.checkWinner(red)) {
                     System.out.println("\nRed is winner !");
                     break;
                 }
-                map.rotate();
-                map.print();
-                if (map.checkWinner(red) && map.checkWinner(black)) {
+                game.rotate();
+                game.print();
+                if (game.checkWinner(red) && game.checkWinner(black)) {
                     System.out.println("\nequal!");
                     break;
-                }else if(map.checkWinner(red)){
+                } else if (game.checkWinner(red)) {
                     System.out.println("\nRed is winner !");
                     break;
-                }
-                else if(map.checkWinner(black)){
+                } else if (game.checkWinner(black)) {
                     System.out.println("\nblack is winner !");
                     break;
                 }
