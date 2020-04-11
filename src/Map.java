@@ -37,7 +37,7 @@ public class Map {
     }
 
     /**
-     * check given line of map that allows player to win - provide game wining rule
+     * check given line(horizontal and vertical only) of map that allows player to win - provide game wining rule
      * @param main start point of line
      * @param a next disk on the line
      * @param b next disk on the line
@@ -72,7 +72,7 @@ public class Map {
         if (num == 2)
             return square2;
         if (num == 3)
-            return square3; 
+            return square3;
         if (num == 4)
             return square4;
         else
